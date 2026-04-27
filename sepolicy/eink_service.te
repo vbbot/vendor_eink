@@ -1,0 +1,19 @@
+type eink_service, domain;
+type eink_service_exec, exec_type, file_type, system_file_type;
+
+init_daemon_domain(eink_service)
+
+# e-ink CPLD refresh node
+type eink_cpld_sysfs, fs_type, sysfs_type;
+allow eink_service eink_cpld_sysfs:file rw_file_perms;
+allow eink_service eink_cpld_sysfs:dir r_dir_perms;
+
+# LED brightness nodes (cold, warm frontlight, keyboard backlight)
+allow eink_service sysfs_leds:file rw_file_perms;
+allow eink_service sysfs_leds:dir r_dir_perms;
+
+# Binder
+binder_use(eink_service)
+add_service(eink_service, eink_service_service)
+
+type eink_service_service, service_manager_type;

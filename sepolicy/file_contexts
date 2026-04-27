@@ -1,0 +1,2 @@
+/system/bin/hw/vendor\.vbbot\.eink-service    u:object_r:eink_service_exec:s0
+/sys/devices/platform/soc/11f00000\.i2c/i2c-7/7-004b(/.*)?    u:object_r:eink_cpld_sysfs:s0

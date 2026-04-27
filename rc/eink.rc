@@ -1,0 +1,9 @@
+service vendor.eink /system/bin/hw/vendor.vbbot.eink-service
+    class main
+    user system
+    group system
+    oneshot
+    disabled
+
+on property:sys.boot_completed=1
+    start vendor.eink

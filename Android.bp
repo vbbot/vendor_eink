@@ -1,0 +1,44 @@
+/*
+ * SPDX-FileCopyrightText: 2026 @vbbot
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+aidl_interface {
+    name: "vendor.vbbot.eink",
+    vendor_available: true,
+    srcs: ["aidl/vendor/vbbot/eink/*.aidl"],
+    stability: "vintf",
+    owner: "vbbot",
+    backend: {
+        cpp: {
+            enabled: false,
+        },
+        java: {
+            sdk_version: "module_current",
+        },
+    },
+    frozen: false,
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+    ],
+}
+
+cc_binary {
+    name: "vendor.vbbot.eink-service",
+    init_rc: ["rc/eink.rc"],
+    vintf_fragments: ["vintf/vendor.vbbot.eink.xml"],
+    srcs: [
+        "service/EinkService.cpp",
+        "service/main.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "liblog",
+        "vendor.vbbot.eink-V1-ndk",
+    ],
+    relative_install_path: "hw",
+}
