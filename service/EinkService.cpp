@@ -20,7 +20,7 @@ static constexpr char kKbdNode[]  = "/sys/class/leds/keyboard-backlight/brightne
 
 bool EinkService::writeSysfs(const std::string& path, const std::string& value) {
     if (!android::base::WriteStringToFile(value, path)) {
-        ALOGE("Failed to write '%s' to %s: %s", value.c_str(), path.c_str(), strerror(errno));
+        LOG(ERROR) << "Failed to write '" << value << "' to " << path << ": " << strerror(errno);
         return false;
     }
     return true;

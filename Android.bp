@@ -6,8 +6,8 @@
 aidl_interface {
     name: "vendor.vbbot.eink",
     vendor_available: true,
-    srcs: ["aidl/vendor/vbbot/eink/*.aidl"],
-    stability: "vintf",
+    unstable: true,
+    srcs: ["vendor/vbbot/eink/*.aidl"],
     owner: "vbbot",
     backend: {
         cpp: {
@@ -17,19 +17,17 @@ aidl_interface {
             sdk_version: "module_current",
         },
     },
-    frozen: false,
-    versions_with_info: [
-        {
-            version: "1",
-            imports: [],
-        },
-    ],
+}
+
+vintf_fragment {
+    name: "vendor.vbbot.eink.xml",
+    src: "vintf/vendor.vbbot.eink.xml",
 }
 
 cc_binary {
     name: "vendor.vbbot.eink-service",
     init_rc: ["rc/eink.rc"],
-    vintf_fragments: ["vintf/vendor.vbbot.eink.xml"],
+    vintf_fragment_modules: ["vendor.vbbot.eink.xml"],
     srcs: [
         "service/EinkService.cpp",
         "service/main.cpp",
@@ -38,7 +36,7 @@ cc_binary {
         "libbase",
         "libbinder_ndk",
         "liblog",
-        "vendor.vbbot.eink-V1-ndk",
+        "vendor.vbbot.eink-ndk",
     ],
     relative_install_path: "hw",
 }

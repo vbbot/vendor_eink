@@ -5,7 +5,6 @@
 
 package vendor.vbbot.eink;
 
-@VintfStability
 interface IEinkService {
     // Refresh mode: 1=BALANCED 2=CLEAR 3=SMOOTH 4=SPEED
     void setRefreshMode(int mode);
