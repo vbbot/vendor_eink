@@ -1,3 +1,8 @@
+on init
+    # Linear brightness slider — E-Ink frontlight range is too small for the HLG perceptual curve.
+    # With this set, slider 0-100% maps directly to hardware 0-80 with no dead zone at the bottom.
+    setprop sys.brightness.disable_gamma_conversion true
+
 service vendor.eink /system/bin/hw/vendor.vbbot.eink-service
     class main
     user system
